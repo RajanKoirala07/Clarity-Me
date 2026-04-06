@@ -116,7 +116,7 @@ export default function LoginScreen() {
 
         {/* Footer */}
         <View style={styles.footer}>
-          <TouchableOpacity>
+          <TouchableOpacity onPress={() => router.replace('/(tabs)')}>
             <Text style={styles.skipText}>Skip for now</Text>
           </TouchableOpacity>
           <View style={styles.signUpRow}>

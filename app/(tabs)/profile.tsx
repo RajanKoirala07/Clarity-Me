@@ -1,22 +1,21 @@
-import React, { useState } from 'react';
+import { Ionicons } from "@expo/vector-icons";
+import { useRouter } from "expo-router";
+import React, { useState } from "react";
 import {
-  StyleSheet,
-  View,
-  Text,
   ScrollView,
-  TouchableOpacity,
+  StyleSheet,
   Switch,
-  Image,
-} from 'react-native';
-import { SafeAreaView } from 'react-native-safe-area-context';
-import { Ionicons } from '@expo/vector-icons';
-import { useRouter } from 'expo-router';
+  Text,
+  TouchableOpacity,
+  View,
+} from "react-native";
+import { SafeAreaView } from "react-native-safe-area-context";
 
-const TEAL = '#0D9488';
-const TEAL_DARK = '#0F766E';
-const TEAL_LIGHT = '#E6FAF5';
-const GRAY_TEXT = '#6B7280';
-const DARK_TEXT = '#1F2937';
+const TEAL = "#0D9488";
+const TEAL_DARK = "#0F766E";
+const TEAL_LIGHT = "#E6FAF5";
+const GRAY_TEXT = "#6B7280";
+const DARK_TEXT = "#1F2937";
 
 export default function ProfileScreen() {
   const router = useRouter();
@@ -67,10 +66,7 @@ export default function ProfileScreen() {
               <View key={i} style={styles.miniBarCol}>
                 <View style={styles.miniBarTrack}>
                   <View
-                    style={[
-                      styles.miniBarFill,
-                      { height: `${v * 100}%` },
-                    ]}
+                    style={[styles.miniBarFill, { height: `${v * 100}%` }]}
                   />
                 </View>
               </View>
@@ -90,7 +86,7 @@ export default function ProfileScreen() {
           <Switch
             value={sensoryPrefs}
             onValueChange={setSensoryPrefs}
-            trackColor={{ false: '#D1D5DB', true: TEAL }}
+            trackColor={{ false: "#D1D5DB", true: TEAL }}
             thumbColor="#fff"
           />
         </View>
@@ -107,27 +103,31 @@ export default function ProfileScreen() {
         {/* Daily Check-ins */}
         <TouchableOpacity
           style={styles.settingRow}
-          onPress={() => router.push('/daily-checkin')}
+          onPress={() => router.push("/daily-checkin")}
         >
           <View style={styles.settingInfo}>
             <Text style={styles.settingLabel}>Daily check ins</Text>
-            <Text style={styles.settingDesc}>
-              Get Personalized suggestions
-            </Text>
+            <Text style={styles.settingDesc}>Get Personalized suggestions</Text>
           </View>
           <Ionicons name="chevron-forward" size={20} color={GRAY_TEXT} />
         </TouchableOpacity>
 
         {/* Action Buttons */}
-        <TouchableOpacity style={styles.unlockButton}>
+        {/* <TouchableOpacity style={styles.unlockButton}>
           <Text style={styles.unlockButtonText}>Unlock Full Clarity</Text>
-        </TouchableOpacity>
+        </TouchableOpacity> */}
 
-        <TouchableOpacity style={styles.safetyButton}>
+        <TouchableOpacity
+          style={styles.safetyButton}
+          onPress={() => router.push("/disclaimer")}
+        >
           <Text style={styles.safetyButtonText}>Safety & Disclaimer</Text>
         </TouchableOpacity>
 
-        <TouchableOpacity style={styles.logoutButton} onPress={() => router.replace('/login')}>
+        <TouchableOpacity
+          style={styles.logoutButton}
+          onPress={() => router.replace("/login")}
+        >
           <Text style={styles.logoutText}>Log Out</Text>
         </TouchableOpacity>
       </ScrollView>
@@ -138,7 +138,7 @@ export default function ProfileScreen() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
+    backgroundColor: "#fff",
   },
   scrollContent: {
     paddingHorizontal: 24,
@@ -147,7 +147,7 @@ const styles = StyleSheet.create({
 
   // Logo
   logoSection: {
-    alignItems: 'center',
+    alignItems: "center",
     marginTop: 12,
     marginBottom: 24,
   },
@@ -156,13 +156,13 @@ const styles = StyleSheet.create({
     height: 64,
     borderRadius: 32,
     backgroundColor: TEAL_LIGHT,
-    alignItems: 'center',
-    justifyContent: 'center',
+    alignItems: "center",
+    justifyContent: "center",
     marginBottom: 8,
   },
   appName: {
     fontSize: 20,
-    fontWeight: '700',
+    fontWeight: "700",
     color: DARK_TEXT,
   },
   appTagline: {
@@ -173,7 +173,7 @@ const styles = StyleSheet.create({
 
   // Avatar
   avatarSection: {
-    alignItems: 'center',
+    alignItems: "center",
     marginBottom: 24,
   },
   avatarRing: {
@@ -182,8 +182,8 @@ const styles = StyleSheet.create({
     borderRadius: 44,
     borderWidth: 3,
     borderColor: TEAL_LIGHT,
-    alignItems: 'center',
-    justifyContent: 'center',
+    alignItems: "center",
+    justifyContent: "center",
     marginBottom: 10,
   },
   avatarPlaceholder: {
@@ -191,18 +191,18 @@ const styles = StyleSheet.create({
     height: 76,
     borderRadius: 38,
     backgroundColor: TEAL_LIGHT,
-    alignItems: 'center',
-    justifyContent: 'center',
+    alignItems: "center",
+    justifyContent: "center",
   },
   userName: {
     fontSize: 18,
-    fontWeight: '700',
+    fontWeight: "700",
     color: DARK_TEXT,
   },
   greeting: {
     fontSize: 15,
     color: TEAL,
-    fontWeight: '500',
+    fontWeight: "500",
     marginTop: 2,
   },
 
@@ -215,21 +215,21 @@ const styles = StyleSheet.create({
   },
   progressTitle: {
     fontSize: 15,
-    fontWeight: '700',
+    fontWeight: "700",
     color: DARK_TEXT,
     marginBottom: 14,
   },
   statsRow: {
-    flexDirection: 'row',
-    justifyContent: 'space-around',
+    flexDirection: "row",
+    justifyContent: "space-around",
     marginBottom: 16,
   },
   statItem: {
-    alignItems: 'center',
+    alignItems: "center",
   },
   statNumber: {
     fontSize: 28,
-    fontWeight: '700',
+    fontWeight: "700",
     color: TEAL_DARK,
   },
   statLabel: {
@@ -238,25 +238,25 @@ const styles = StyleSheet.create({
     marginTop: 2,
   },
   miniChart: {
-    flexDirection: 'row',
-    justifyContent: 'center',
+    flexDirection: "row",
+    justifyContent: "center",
     gap: 8,
     height: 50,
-    alignItems: 'flex-end',
+    alignItems: "flex-end",
   },
   miniBarCol: {
-    alignItems: 'center',
+    alignItems: "center",
   },
   miniBarTrack: {
     width: 20,
     height: 50,
-    backgroundColor: 'rgba(255,255,255,0.6)',
+    backgroundColor: "rgba(255,255,255,0.6)",
     borderRadius: 4,
-    justifyContent: 'flex-end',
-    overflow: 'hidden',
+    justifyContent: "flex-end",
+    overflow: "hidden",
   },
   miniBarFill: {
-    width: '100%',
+    width: "100%",
     backgroundColor: TEAL,
     borderRadius: 4,
   },
@@ -264,17 +264,17 @@ const styles = StyleSheet.create({
   // Settings
   sectionTitle: {
     fontSize: 17,
-    fontWeight: '700',
+    fontWeight: "700",
     color: DARK_TEXT,
     marginBottom: 14,
   },
   settingRow: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'space-between',
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "space-between",
     paddingVertical: 14,
     borderBottomWidth: 1,
-    borderBottomColor: '#F3F4F6',
+    borderBottomColor: "#F3F4F6",
   },
   settingInfo: {
     flex: 1,
@@ -282,7 +282,7 @@ const styles = StyleSheet.create({
   },
   settingLabel: {
     fontSize: 15,
-    fontWeight: '600',
+    fontWeight: "600",
     color: DARK_TEXT,
   },
   settingDesc: {
@@ -296,35 +296,35 @@ const styles = StyleSheet.create({
     backgroundColor: TEAL,
     borderRadius: 14,
     paddingVertical: 16,
-    alignItems: 'center',
+    alignItems: "center",
     marginTop: 28,
     marginBottom: 12,
   },
   unlockButtonText: {
     fontSize: 16,
-    fontWeight: '700',
-    color: '#fff',
+    fontWeight: "700",
+    color: "#fff",
   },
   safetyButton: {
     backgroundColor: TEAL_LIGHT,
     borderRadius: 14,
     paddingVertical: 16,
-    alignItems: 'center',
+    alignItems: "center",
     marginBottom: 16,
   },
   safetyButtonText: {
     fontSize: 16,
-    fontWeight: '700',
+    fontWeight: "700",
     color: TEAL_DARK,
   },
   logoutButton: {
-    alignItems: 'center',
+    alignItems: "center",
     paddingVertical: 12,
     marginBottom: 10,
   },
   logoutText: {
     fontSize: 15,
-    fontWeight: '600',
-    color: '#EF4444',
+    fontWeight: "600",
+    color: "#EF4444",
   },
 });
