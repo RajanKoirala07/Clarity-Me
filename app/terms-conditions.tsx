@@ -1,20 +1,13 @@
-import {
-  View,
-  Text,
-  ScrollView,
-  SafeAreaView,
-  TouchableOpacity,
-  StyleSheet,
-} from 'react-native';
-import { useColorScheme } from '@/hooks/use-color-scheme';
+import { useColorScheme } from "@/hooks/use-color-scheme";
+import { SafeAreaView, ScrollView, StyleSheet, Text, View } from "react-native";
 
-const TEAL = '#3D8B85';
-const BG = '#D6EEEC';
-const DARK_TEXT = '#1a1a1a';
+const TEAL = "#3D8B85";
+const BG = "#D6EEEC";
+const DARK_TEXT = "#1a1a1a";
 
 export default function TermsConditionsScreen() {
   const colorScheme = useColorScheme();
-  const isDark = colorScheme === 'dark';
+  const isDark = colorScheme === "dark";
 
   return (
     <SafeAreaView style={styles.container}>
@@ -22,9 +15,14 @@ export default function TermsConditionsScreen() {
         contentContainerStyle={styles.scrollContent}
         showsVerticalScrollIndicator={false}
       >
-        <View style={[styles.card, { backgroundColor: isDark ? '#1e1e1e' : '#fff' }]}>
+        <View
+          style={[
+            styles.card,
+            { backgroundColor: isDark ? "#1e1e1e" : "#fff" },
+          ]}
+        >
           {/* Title */}
-          <Text style={[styles.title, { color: isDark ? '#fff' : DARK_TEXT }]}>
+          <Text style={[styles.title, { color: isDark ? "#fff" : DARK_TEXT }]}>
             Full Terms & Conditions
           </Text>
 
@@ -89,12 +87,7 @@ export default function TermsConditionsScreen() {
           />
 
           {/* Footer */}
-          <Text
-            style={[
-              styles.footer,
-              { color: isDark ? '#999' : '#666' },
-            ]}
-          >
+          <Text style={[styles.footer, { color: isDark ? "#999" : "#666" }]}>
             Last updated: March 2026
           </Text>
         </View>
@@ -114,14 +107,13 @@ function Section({
 }) {
   return (
     <View style={styles.section}>
-      <Text style={[styles.sectionTitle, { color: isDark ? '#fff' : DARK_TEXT }]}>
+      <Text
+        style={[styles.sectionTitle, { color: isDark ? "#fff" : DARK_TEXT }]}
+      >
         {title}
       </Text>
       <Text
-        style={[
-          styles.sectionContent,
-          { color: isDark ? '#ddd' : DARK_TEXT },
-        ]}
+        style={[styles.sectionContent, { color: isDark ? "#ddd" : DARK_TEXT }]}
       >
         {content}
       </Text>
@@ -141,7 +133,7 @@ const styles = StyleSheet.create({
   card: {
     borderRadius: 12,
     padding: 20,
-    shadowColor: '#000',
+    shadowColor: "#000",
     shadowOffset: { width: 0, height: 2 },
     shadowOpacity: 0.1,
     shadowRadius: 8,
@@ -149,7 +141,7 @@ const styles = StyleSheet.create({
   },
   title: {
     fontSize: 22,
-    fontWeight: '700',
+    fontWeight: "700",
     marginBottom: 20,
   },
   section: {
@@ -157,7 +149,7 @@ const styles = StyleSheet.create({
   },
   sectionTitle: {
     fontSize: 16,
-    fontWeight: '600',
+    fontWeight: "600",
     marginBottom: 8,
   },
   sectionContent: {
@@ -166,10 +158,10 @@ const styles = StyleSheet.create({
   },
   footer: {
     fontSize: 12,
-    textAlign: 'center',
+    textAlign: "center",
     marginTop: 24,
     paddingTop: 16,
     borderTopWidth: 1,
-    borderTopColor: '#e0e0e0',
+    borderTopColor: "#e0e0e0",
   },
 });

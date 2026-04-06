@@ -127,7 +127,7 @@ export default function ProfileScreen() {
           <Text style={styles.safetyButtonText}>Safety & Disclaimer</Text>
         </TouchableOpacity>
 
-        <TouchableOpacity style={styles.logoutButton}>
+        <TouchableOpacity style={styles.logoutButton} onPress={() => router.replace('/login')}>
           <Text style={styles.logoutText}>Log Out</Text>
         </TouchableOpacity>
       </ScrollView>

@@ -1,8 +1,8 @@
-import { StyleSheet, View, Text, SafeAreaView, ScrollView } from 'react-native';
-import { ThemedText } from '@/components/themed-text';
-import { ThemedView } from '@/components/themed-view';
+import { ThemedText } from "@/components/themed-text";
+import { ThemedView } from "@/components/themed-view";
+import { SafeAreaView, ScrollView, StyleSheet } from "react-native";
 
-const BG = '#D6EEEC';
+const BG = "#D6EEEC";
 
 export default function ProgressScreen() {
   return (
@@ -13,7 +13,9 @@ export default function ProgressScreen() {
         </ThemedView>
         <ThemedView style={styles.contentContainer}>
           <ThemedText type="subtitle">Track your wellness journey</ThemedText>
-          <ThemedText>Your progress and statistics will appear here.</ThemedText>
+          <ThemedText>
+            Your progress and statistics will appear here.
+          </ThemedText>
         </ThemedView>
       </ScrollView>
     </SafeAreaView>

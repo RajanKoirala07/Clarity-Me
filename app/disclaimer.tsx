@@ -1,39 +1,35 @@
+import { Collapsible } from "@/components/ui/collapsible";
+import { useColorScheme } from "@/hooks/use-color-scheme";
+import { router } from "expo-router";
+import { useState } from "react";
 import {
-  View,
-  Text,
-  TouchableOpacity,
-  StyleSheet,
   SafeAreaView,
   ScrollView,
-  Linking,
-} from 'react-native';
-import { useState } from 'react';
-import { router } from 'expo-router';
-import { Collapsible } from '@/components/ui/collapsible';
-import { ThemedText } from '@/components/themed-text';
-import { ThemedView } from '@/components/themed-view';
-import { useColorScheme } from '@/hooks/use-color-scheme';
-import { Colors } from '@/constants/theme';
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  View,
+} from "react-native";
 
-const TEAL = '#3D8B85';
-const BG = '#D6EEEC';
-const DARK_TEXT = '#1a1a1a';
+const TEAL = "#3D8B85";
+const BG = "#D6EEEC";
+const DARK_TEXT = "#1a1a1a";
 
 export default function DisclaimerScreen() {
   const [agreed, setAgreed] = useState(false);
   const colorScheme = useColorScheme();
-  const isDark = colorScheme === 'dark';
+  const isDark = colorScheme === "dark";
 
   const handleAgree = () => {
     if (agreed) {
       // Save agreement to storage and navigate
-      router.replace('/(tabs)');
+      router.replace("/(tabs)");
     }
   };
 
   const handleViewTerms = () => {
     // Navigate to full terms page - can be a modal or web page
-    router.push('/terms-conditions');
+    router.push("/terms-conditions");
   };
 
   return (
@@ -45,33 +41,34 @@ export default function DisclaimerScreen() {
       >
         {/* Header */}
         <View style={styles.header}>
-          <Text style={[styles.title, { color: isDark ? '#fff' : DARK_TEXT }]}>
+          <Text style={[styles.title, { color: isDark ? "#fff" : DARK_TEXT }]}>
             Clarity & Disclaimer
           </Text>
-          <Text
-            style={[
-              styles.subtitle,
-              { color: isDark ? '#ccc' : '#555' },
-            ]}
-          >
-            Please read the important information before using our mindfulness practices.
+          <Text style={[styles.subtitle, { color: isDark ? "#ccc" : "#555" }]}>
+            Please read the important information before using our mindfulness
+            practices.
           </Text>
         </View>
 
         {/* Content Card */}
-        <View style={[styles.card, { backgroundColor: isDark ? '#1e1e1e' : '#fff' }]}>
+        <View
+          style={[
+            styles.card,
+            { backgroundColor: isDark ? "#1e1e1e" : "#fff" },
+          ]}
+        >
           <View style={styles.collapsibleContainer}>
             {/* Purpose Section */}
             <Collapsible title="Purpose">
               <Text
                 style={[
                   styles.collapsibleContent,
-                  { color: isDark ? '#ddd' : DARK_TEXT },
+                  { color: isDark ? "#ddd" : DARK_TEXT },
                 ]}
               >
-                These mindfulness and occupational therapy practices are designed to support your
-                general well-being. They are not a substitute for professional medical or mental
-                health treatment.
+                These mindfulness and occupational therapy practices are
+                designed to support your general well-being. They are not a
+                substitute for professional medical or mental health treatment.
               </Text>
             </Collapsible>
 
@@ -81,24 +78,25 @@ export default function DisclaimerScreen() {
               <Text
                 style={[
                   styles.collapsibleContent,
-                  { color: isDark ? '#ddd' : DARK_TEXT },
+                  { color: isDark ? "#ddd" : DARK_TEXT },
                 ]}
               >
-                Consult with a healthcare provider before using these practices if you have:
+                Consult with a healthcare provider before using these practices
+                if you have:
               </Text>
               <View style={styles.bulletList}>
                 {[
-                  'Severe mental health conditions',
-                  'Recent trauma or PTSD',
-                  'Medical conditions affecting balance or movement',
-                  'Any concerns about your health',
+                  "Severe mental health conditions",
+                  "Recent trauma or PTSD",
+                  "Medical conditions affecting balance or movement",
+                  "Any concerns about your health",
                 ].map((item, index) => (
                   <View key={index} style={styles.bulletPoint}>
                     <Text style={[styles.bullet, { color: TEAL }]}>• </Text>
                     <Text
                       style={[
                         styles.bulletText,
-                        { color: isDark ? '#ddd' : DARK_TEXT },
+                        { color: isDark ? "#ddd" : DARK_TEXT },
                       ]}
                     >
                       {item}
@@ -114,24 +112,24 @@ export default function DisclaimerScreen() {
               <Text
                 style={[
                   styles.collapsibleContent,
-                  { color: isDark ? '#ddd' : DARK_TEXT },
+                  { color: isDark ? "#ddd" : DARK_TEXT },
                 ]}
               >
                 By using this app, you acknowledge that:
               </Text>
               <View style={styles.bulletList}>
                 {[
-                  'You are participating of your own free will',
-                  'You take responsibility for your own health and safety',
-                  'You will discontinue any practice that causes discomfort',
-                  'You understand these practices are self-directed',
+                  "You are participating of your own free will",
+                  "You take responsibility for your own health and safety",
+                  "You will discontinue any practice that causes discomfort",
+                  "You understand these practices are self-directed",
                 ].map((item, index) => (
                   <View key={index} style={styles.bulletPoint}>
                     <Text style={[styles.bullet, { color: TEAL }]}>• </Text>
                     <Text
                       style={[
                         styles.bulletText,
-                        { color: isDark ? '#ddd' : DARK_TEXT },
+                        { color: isDark ? "#ddd" : DARK_TEXT },
                       ]}
                     >
                       {item}
@@ -147,12 +145,13 @@ export default function DisclaimerScreen() {
               <Text
                 style={[
                   styles.collapsibleContent,
-                  { color: isDark ? '#ddd' : DARK_TEXT },
+                  { color: isDark ? "#ddd" : DARK_TEXT },
                 ]}
               >
-                Clarity & Me and its creators assume no liability for any outcomes resulting from
-                the use of these practices. We make no guarantees about results and cannot be held
-                responsible for any adverse effects.
+                Clarity & Me and its creators assume no liability for any
+                outcomes resulting from the use of these practices. We make no
+                guarantees about results and cannot be held responsible for any
+                adverse effects.
               </Text>
             </Collapsible>
           </View>
@@ -169,8 +168,8 @@ export default function DisclaimerScreen() {
                 style={[
                   styles.checkbox,
                   {
-                    backgroundColor: agreed ? TEAL : 'transparent',
-                    borderColor: isDark ? '#555' : '#ccc',
+                    backgroundColor: agreed ? TEAL : "transparent",
+                    borderColor: isDark ? "#555" : "#ccc",
                   },
                 ]}
               >
@@ -179,7 +178,7 @@ export default function DisclaimerScreen() {
               <Text
                 style={[
                   styles.agreeText,
-                  { color: isDark ? '#ddd' : DARK_TEXT },
+                  { color: isDark ? "#ddd" : DARK_TEXT },
                 ]}
               >
                 I understand and agree
@@ -190,7 +189,7 @@ export default function DisclaimerScreen() {
             <TouchableOpacity
               style={[
                 styles.agreeButton,
-                { backgroundColor: agreed ? TEAL : '#ccc' },
+                { backgroundColor: agreed ? TEAL : "#ccc" },
               ]}
               onPress={handleAgree}
               disabled={!agreed}
@@ -212,7 +211,7 @@ export default function DisclaimerScreen() {
             <Text
               style={[
                 styles.footerWarning,
-                { color: isDark ? '#999' : '#999' },
+                { color: isDark ? "#999" : "#999" },
               ]}
             >
               If unsure, consult your healthcare provider before using.
@@ -235,22 +234,22 @@ const styles = StyleSheet.create({
   },
   header: {
     marginBottom: 24,
-    alignItems: 'center',
+    alignItems: "center",
   },
   title: {
     fontSize: 24,
-    fontWeight: '700',
+    fontWeight: "700",
     marginBottom: 8,
   },
   subtitle: {
     fontSize: 14,
     lineHeight: 20,
-    textAlign: 'center',
+    textAlign: "center",
   },
   card: {
     borderRadius: 12,
     padding: 20,
-    shadowColor: '#000',
+    shadowColor: "#000",
     shadowOffset: { width: 0, height: 2 },
     shadowOpacity: 0.1,
     shadowRadius: 8,
@@ -261,7 +260,7 @@ const styles = StyleSheet.create({
   },
   divider: {
     height: 1,
-    backgroundColor: '#e0e0e0',
+    backgroundColor: "#e0e0e0",
     marginVertical: 12,
   },
   collapsibleContent: {
@@ -273,7 +272,7 @@ const styles = StyleSheet.create({
     marginTop: 8,
   },
   bulletPoint: {
-    flexDirection: 'row',
+    flexDirection: "row",
     marginBottom: 8,
   },
   bullet: {
@@ -289,8 +288,8 @@ const styles = StyleSheet.create({
     marginTop: 24,
   },
   checkboxContainer: {
-    flexDirection: 'row',
-    alignItems: 'center',
+    flexDirection: "row",
+    alignItems: "center",
     marginBottom: 16,
   },
   checkbox: {
@@ -299,41 +298,41 @@ const styles = StyleSheet.create({
     borderRadius: 4,
     borderWidth: 2,
     marginRight: 12,
-    justifyContent: 'center',
-    alignItems: 'center',
+    justifyContent: "center",
+    alignItems: "center",
   },
   checkmark: {
-    color: '#fff',
+    color: "#fff",
     fontSize: 14,
-    fontWeight: '600',
+    fontWeight: "600",
   },
   agreeText: {
     fontSize: 14,
-    fontWeight: '500',
+    fontWeight: "500",
   },
   agreeButton: {
     paddingVertical: 14,
     borderRadius: 8,
-    alignItems: 'center',
+    alignItems: "center",
     marginBottom: 12,
   },
   agreeButtonText: {
-    color: '#fff',
+    color: "#fff",
     fontSize: 16,
-    fontWeight: '600',
+    fontWeight: "600",
   },
   termsLink: {
-    alignItems: 'center',
+    alignItems: "center",
     paddingVertical: 12,
     marginBottom: 16,
   },
   termsLinkText: {
     fontSize: 14,
-    fontWeight: '500',
+    fontWeight: "500",
   },
   footerWarning: {
     fontSize: 12,
-    textAlign: 'center',
+    textAlign: "center",
     lineHeight: 18,
   },
 });
