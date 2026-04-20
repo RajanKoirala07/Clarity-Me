@@ -8,10 +8,14 @@ import {
   ScrollView,
   Platform,
   Image,
+  ActivityIndicator,
 } from 'react-native';
 import { useState } from 'react';
 import { router } from 'expo-router';
 import { Ionicons, AntDesign } from '@expo/vector-icons';
+import { login } from '@/services/auth';
+import { useAuth } from '@/context/AuthContext';
+import { ApiError } from '@/services/api';
 
 const TEAL = '#3D8B85';
 const BG = '#D6EEEC';
@@ -20,10 +24,30 @@ export default function LoginScreen() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [showPassword, setShowPassword] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState('');
+  const { setUser } = useAuth();
 
-  const handleLogin = () => {
-    // TODO: add auth logic
-    router.replace('/(tabs)');
+  const handleLogin = async () => {
+    if (!email.trim() || !password.trim()) {
+      setError('Please enter your email and password.');
+      return;
+    }
+    try {
+      setError('');
+      setLoading(true);
+      const user = await login(email.trim(), password);
+      setUser(user);
+      router.replace('/(tabs)');
+    } catch (e) {
+      if (e instanceof ApiError && e.status === 401) {
+        setError('Incorrect email or password.');
+      } else {
+        setError('Something went wrong. Please try again.');
+      }
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
@@ -89,9 +113,19 @@ export default function LoginScreen() {
             <Text style={styles.forgotPasswordText}>Forgot password?</Text>
           </TouchableOpacity>
 
+          {/* Error */}
+          {error ? <Text style={styles.errorText}>{error}</Text> : null}
+
           {/* Sign In */}
-          <TouchableOpacity style={styles.primaryButton} onPress={handleLogin}>
-            <Text style={styles.primaryButtonText}>Sign In</Text>
+          <TouchableOpacity
+            style={[styles.primaryButton, loading && styles.primaryButtonDisabled]}
+            onPress={handleLogin}
+            disabled={loading}
+          >
+            {loading
+              ? <ActivityIndicator color="#FFFFFF" />
+              : <Text style={styles.primaryButtonText}>Sign In</Text>
+            }
           </TouchableOpacity>
 
           {/* Divider */}
@@ -256,6 +290,15 @@ const styles = StyleSheet.create({
     fontSize: 16,
     fontWeight: '700',
     letterSpacing: 0.3,
+  },
+  primaryButtonDisabled: {
+    opacity: 0.6,
+  },
+  errorText: {
+    fontSize: 13,
+    color: '#D9534F',
+    marginBottom: 12,
+    textAlign: 'center',
   },
 
   // Divider

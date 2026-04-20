@@ -8,21 +8,42 @@ import {
   ScrollView,
   Platform,
   Image,
+  ActivityIndicator,
 } from 'react-native';
 import { useState } from 'react';
 import { router } from 'expo-router';
 import { Ionicons } from '@expo/vector-icons';
+import { forgotPassword } from '@/services/auth';
+import { ApiError } from '@/services/api';
 
 const TEAL = '#3D8B85';
 const BG = '#D6EEEC';
 
 export default function ForgotPasswordScreen() {
   const [email, setEmail] = useState('');
-  const [sent, setSent] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState('');
+  const [success, setSuccess] = useState(false);
 
-  const handleSend = () => {
-    // TODO: add reset logic
-    setSent(true);
+  const handleSend = async () => {
+    if (!email.trim()) {
+      setError('Please enter your email address.');
+      return;
+    }
+    try {
+      setError('');
+      setLoading(true);
+      await forgotPassword(email.trim());
+      setSuccess(true);
+    } catch (e) {
+      if (e instanceof ApiError && e.status === 404) {
+        setError('No account found with that email.');
+      } else {
+        setError('Something went wrong. Please try again.');
+      }
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
@@ -50,25 +71,46 @@ export default function ForgotPasswordScreen() {
             Enter the email associated with your account and we'll send a reset link.
           </Text>
 
-          {/* Email */}
-          <Text style={styles.label}>Email address</Text>
-          <View style={styles.inputWrapper}>
-            <TextInput
-              style={styles.input}
-              placeholder="your.email@example.com"
-              placeholderTextColor="#B0C8C8"
-              keyboardType="email-address"
-              autoCapitalize="none"
-              value={email}
-              onChangeText={setEmail}
-            />
-            <Ionicons name="mail-outline" size={20} color="#8AAFAF" style={styles.inputIcon} />
-          </View>
+          {success ? (
+            <View style={styles.successBox}>
+              <Ionicons name="checkmark-circle-outline" size={20} color={TEAL} />
+              <Text style={styles.successText}>
+                Reset link sent! Check your inbox.
+              </Text>
+            </View>
+          ) : (
+            <>
+              {/* Email */}
+              <Text style={styles.label}>Email address</Text>
+              <View style={styles.inputWrapper}>
+                <TextInput
+                  style={styles.input}
+                  placeholder="your.email@example.com"
+                  placeholderTextColor="#B0C8C8"
+                  keyboardType="email-address"
+                  autoCapitalize="none"
+                  value={email}
+                  onChangeText={(t) => { setEmail(t); setError(''); }}
+                />
+                <Ionicons name="mail-outline" size={20} color="#8AAFAF" style={styles.inputIcon} />
+              </View>
 
-          {/* Send Button */}
-          <TouchableOpacity style={styles.primaryButton} onPress={handleSend}>
-            <Text style={styles.primaryButtonText}>Send reset link</Text>
-          </TouchableOpacity>
+              {/* Error */}
+              {error ? <Text style={styles.errorText}>{error}</Text> : null}
+
+              {/* Send Button */}
+              <TouchableOpacity
+                style={[styles.primaryButton, loading && styles.primaryButtonDisabled]}
+                onPress={handleSend}
+                disabled={loading}
+              >
+                {loading
+                  ? <ActivityIndicator color="#FFFFFF" />
+                  : <Text style={styles.primaryButtonText}>Send reset link</Text>
+                }
+              </TouchableOpacity>
+            </>
+          )}
 
           {/* Back to login */}
           <TouchableOpacity style={styles.backRow} onPress={() => router.back()}>
@@ -190,6 +232,30 @@ const styles = StyleSheet.create({
     fontSize: 16,
     fontWeight: '700',
     letterSpacing: 0.3,
+  },
+  primaryButtonDisabled: {
+    opacity: 0.6,
+  },
+  errorText: {
+    fontSize: 13,
+    color: '#D9534F',
+    marginBottom: 12,
+    textAlign: 'center',
+  },
+  successBox: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    backgroundColor: '#E8F5F4',
+    borderRadius: 10,
+    padding: 14,
+    gap: 10,
+    marginBottom: 8,
+  },
+  successText: {
+    flex: 1,
+    fontSize: 14,
+    color: '#1E4A4A',
+    fontWeight: '500',
   },
 
   // Back link
