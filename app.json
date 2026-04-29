@@ -39,7 +39,15 @@
           }
         }
       ],
-      "expo-secure-store"
+      "expo-secure-store",
+      "expo-video",
+      [
+        "@kayzmann/expo-healthkit",
+        {
+          "healthShareUsageDescription": "Allow Clarity Me to read your health data to personalize your daily check-in recommendations",
+          "healthUpdateUsageDescription": "Allow Clarity Me to save workout data to the Health app"
+        }
+      ]
     ],
     "experiments": {
       "typedRoutes": true,

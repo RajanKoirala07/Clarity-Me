@@ -3,6 +3,7 @@ import { getItem } from "./storage";
 // Change this to your server's LAN IP when testing on a physical device.
 // Do NOT use 'localhost' or '127.0.0.1' on a real device — it points to the phone itself.
 export const BASE_URL = "http://localhost:9000/api/v1";
+export const SERVER_URL = "http://localhost:9000";
 
 export class ApiError extends Error {
   constructor(
@@ -52,4 +53,6 @@ export const api = {
       { method: "POST", body: JSON.stringify(body) },
       requiresAuth,
     ),
+  get: <T>(path: string, requiresAuth = false) =>
+    request<T>(path, { method: "GET" }, requiresAuth),
 };

@@ -12,7 +12,7 @@ import {
 } from 'react-native';
 import { useState } from 'react';
 import { router } from 'expo-router';
-import { Ionicons, AntDesign } from '@expo/vector-icons';
+import { Ionicons } from '@expo/vector-icons';
 import { login } from '@/services/auth';
 import { useAuth } from '@/context/AuthContext';
 import { ApiError } from '@/services/api';
@@ -128,24 +128,6 @@ export default function LoginScreen() {
             }
           </TouchableOpacity>
 
-          {/* Divider */}
-          <View style={styles.dividerRow}>
-            <View style={styles.dividerLine} />
-            <Text style={styles.dividerText}>or continue with</Text>
-            <View style={styles.dividerLine} />
-          </View>
-
-          {/* Google */}
-          <TouchableOpacity style={styles.socialButton}>
-            <AntDesign name="google" size={20} color="#DB4437" style={styles.socialIcon} />
-            <Text style={styles.socialButtonText}>Continue with Google</Text>
-          </TouchableOpacity>
-
-          {/* Apple */}
-          <TouchableOpacity style={styles.socialButton}>
-            <AntDesign name="apple" size={20} color="#1E4A4A" style={styles.socialIcon} />
-            <Text style={styles.socialButtonText}>Apple Sign In</Text>
-          </TouchableOpacity>
         </View>
 
         {/* Footer */}
@@ -299,44 +281,6 @@ const styles = StyleSheet.create({
     color: '#D9534F',
     marginBottom: 12,
     textAlign: 'center',
-  },
-
-  // Divider
-  dividerRow: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    marginBottom: 16,
-  },
-  dividerLine: {
-    flex: 1,
-    height: 1,
-    backgroundColor: '#E0EDED',
-  },
-  dividerText: {
-    fontSize: 12,
-    color: '#8AAFAF',
-    marginHorizontal: 10,
-  },
-
-  // Social buttons
-  socialButton: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'center',
-    borderWidth: 1.5,
-    borderColor: '#D4E8E8',
-    borderRadius: 12,
-    paddingVertical: 13,
-    marginBottom: 12,
-    backgroundColor: '#FFFFFF',
-  },
-  socialIcon: {
-    marginRight: 10,
-  },
-  socialButtonText: {
-    fontSize: 15,
-    fontWeight: '600',
-    color: '#1E4A4A',
   },
 
   // Footer

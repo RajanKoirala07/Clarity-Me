@@ -15,6 +15,7 @@ export interface User {
   branchTitle: string;
   permission: Record<string, unknown>;
   isPrintEnabled: boolean;
+  isAdmin: boolean;
 }
 
 interface LoginResponse {
@@ -24,10 +25,11 @@ interface LoginResponse {
   apiKeys: { accessKey: string; secretKey: string };
 }
 
-export async function login(username: string, password: string): Promise<User> {
-  const data = await api.post<LoginResponse>('/auth/login', { username, password });
+export async function login(email: string, password: string): Promise<User> {
+  const data = await api.post<LoginResponse>('/auth/login', { email, password });
   await setItem('accessToken', data.accessToken);
   await setItem('refreshToken', data.refreshToken);
+  await setItem('isAdmin', String(data.user.isAdmin ?? false));
   return data.user;
 }
 
@@ -54,8 +56,14 @@ export async function resetPassword(
 export async function logout(): Promise<void> {
   await removeItem('accessToken');
   await removeItem('refreshToken');
+  await removeItem('isAdmin');
 }
 
 export async function getStoredToken(): Promise<string | null> {
   return getItem('accessToken');
+}
+
+export async function getIsAdmin(): Promise<boolean> {
+  const val = await getItem('isAdmin');
+  return val === 'true';
 }
